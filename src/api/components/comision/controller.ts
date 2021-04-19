@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 
-import { returnErrorResponse, getUserIdInRequest } from '../../../utils/response';
+import { returnErrorResponse } from '../../../utils/response';
 
 import * as ComisionService from './service';
 

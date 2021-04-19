@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 
-import { returnErrorResponse, getUserIdInRequest } from '../../../../utils/response';
+import { returnErrorResponse } from '../../../../utils/response';
 
 import * as MiCatalogoService from './service';
 
@@ -25,7 +25,8 @@ async function addToMiCatalogo(req: Request, res: Response) {
     try {
         const data = req.body;
         data.id_vendedor =  "60220b3b04605b18b5b5b190" // await getUserIdInRequest(req)
-
+        console.log({data});
+        
         const info = await MiCatalogoService.addToMiCatalogo(data)
         return res.status(201).json({
             message: 'Se ha enviado solicitud correctamente',

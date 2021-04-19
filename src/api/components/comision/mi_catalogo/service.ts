@@ -85,7 +85,8 @@ export const addToMiCatalogo = async (data: ComisionVendedorInterface) => {
             id_comision: data.id_comision
         }
         const info = await ComisionVendedorModel.findOne(query)
-
+        console.log({info, id_comision: data.id_comision});
+        
         if(info) throw {
             code: 400,
             message: info.estado == 1 ? 'Ya ha enviado una solicitud a este vehiculo' : 'Ya tiene registrado este vehiculo'

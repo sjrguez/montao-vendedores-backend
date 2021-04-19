@@ -20,7 +20,7 @@ async function createUser(req: Request, res: Response) {
 }
 
 
-async function getUserById(req: RequestType, res: Response) {
+async function getUserById(req: any, res: Response) {
     
     let userID = req.params.id // req.id_usuario
     try {
@@ -33,7 +33,7 @@ async function getUserById(req: RequestType, res: Response) {
 }
 
 
-async function updateUser(req: RequestType, res: Response) {
+async function updateUser(req: any, res: Response) {
     let userID = req.params.id // req.id_usuario
     let data = req.body
     try {
