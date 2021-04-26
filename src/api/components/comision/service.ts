@@ -10,7 +10,7 @@ const LoggerInstance = new Logger('Comision-Service')
 
 
 interface FiltroInterface {
-    tipo: 'all' | 'venta' | 'alquiter';
+    tipo: 'all' | 'venta' | 'alquiler';
     marca: string;
     modelo: string;
 }
@@ -38,11 +38,12 @@ export const getComision = async (filtro: FiltroInterface) => {
     try {
         let data;
 
-        if(filtro.tipo.toLowerCase() === 'all') {
-            data = await getAllComision(query);
-        } else {
+
+        if(filtro.tipo && filtro.tipo.toLowerCase() !== 'all') {
             const negocio: any = filtro.tipo
             data = await getComisionRentaOrDealers(negocio, query);
+        } else {
+            data = await getAllComision(query);
         }
 
         return data;
@@ -166,9 +167,9 @@ const getAllComision = async (queryFilter: any) => {
 }
 
 
-const getComisionRentaOrDealers = async (tipo: 'Alquiler' | 'Renta' ,queryMatch: any) => {
+const getComisionRentaOrDealers = async (tipo: 'alquiler' | 'Renta' ,queryMatch: any) => {
 
-    const tipoNegocio = tipo == 'Alquiler' ? 'Vehiculos_rentas' : 'Vehiculos_dealers'
+    const tipoNegocio = tipo == 'alquiler' ? 'Vehiculos_rentas' : 'Vehiculos_dealers'
     const query = [
         {
             $match: {
@@ -194,8 +195,8 @@ const getComisionRentaOrDealers = async (tipo: 'Alquiler' | 'Renta' ,queryMatch:
                     {
                         $project: {
                             vehiculo_indexado: 1,
-                            precio_vehiculo: tipo == 'Alquiler' ? '$precios.precio_general' : '$precio_venta' ,
-                            id_moneda: tipo == 'Alquiler' ? "$precios.id_moneda" : '$id_moneda',
+                            precio_vehiculo: tipo == 'alquiler' ? '$precios.precio_general' : '$precio_venta' ,
+                            id_moneda: tipo == 'alquiler' ? "$precios.id_moneda" : '$id_moneda',
                             id_vehiculo: 1
                         }
                     }

@@ -42,9 +42,7 @@ export const getMiCatalogo = async (id_vendedor: string, filtro: FiltroInterface
     try {
         let info;
        
-        if(filtro.tipo.toLowerCase() === 'all') {
-            info = await getAllMiCatalogo(id_vendedor, query);
-        } else {
+        if(filtro.tipo && filtro.tipo.toLowerCase() !== 'all') {
             
             const params: any = { 
                 id_vendedor: id_vendedor,
@@ -52,6 +50,8 @@ export const getMiCatalogo = async (id_vendedor: string, filtro: FiltroInterface
                 tipo: filtro.tipo
             }
             info = await getMiCatalogoRentaOrDealers( params );
+        } else {
+            info = await getAllMiCatalogo(id_vendedor, query);
         }
             
         return info;

@@ -15,6 +15,8 @@ async function getMiCatalogo(req: Request, res: Response) {
         const data = await MiCatalogoService.getMiCatalogo(id_vendedor, filtro)
         return res.json(data)
     } catch (error) {
+        console.log({error});
+        
         return returnErrorResponse(res, error)
     }
 
@@ -25,7 +27,6 @@ async function addToMiCatalogo(req: Request, res: Response) {
     try {
         const data = req.body;
         data.id_vendedor =  "60220b3b04605b18b5b5b190" // await getUserIdInRequest(req)
-        console.log({data});
         
         const info = await MiCatalogoService.addToMiCatalogo(data)
         return res.status(201).json({
