@@ -1,9 +1,8 @@
-import { Router } from 'express';
+import { Router } from "express";
 
 import MiCatalogoController from "./controller";
 
 const ROUTER: Router = Router();
-
 
 /**
  * Path:
@@ -11,8 +10,8 @@ const ROUTER: Router = Router();
  * Method:
  *      -Get
  *  Query params
- * 
- *      - tipo: string; 
+ *
+ *      - tipo: string;
  *      - marca?: string;
  *      - modelo?: string;
  *  * Response
@@ -32,17 +31,17 @@ const ROUTER: Router = Router();
  *  * Error Response
  *       - status code = 500
  *      - message
- * 
- * 
+ *
+ *
  */
 
-ROUTER.get('/', MiCatalogoController.getMiCatalogo)
+ROUTER.get("/", MiCatalogoController.getMiCatalogo);
 
 /**
  * Path:
  *     /mi_catalogo/
  * Method:
- *    -Get
+ *    -Post
  * params
  *   - id_vendedor: string
  *   - id_comision: string
@@ -50,19 +49,24 @@ ROUTER.get('/', MiCatalogoController.getMiCatalogo)
  *   {
  *   "message": "Se ha enviado solicitud correctamente",
  *   "paginaInfo": [
- *       {
- *           "_id": "60580ccb0917f5362acca6d3",
- *           "contactos": [],
- *           "nombre_empresa": "asdasd"
- *       }
+ *        {
+ *          "_id": "6088b10b08f33c0fc503c926",
+ *          "contactos": [
+ *              {
+ *                  "contacto": string,
+ *                  "titulo": string
+ *              }
+ *          ],
+ *          "nombre_empresa": "cambie el nombre 2"
+ *      }
  *     ]
  *    }
- * 
+ *
  * Error Response
  *  - status code = 500 | 404 | 400
  *  - message
  */
 
-ROUTER.post('/', MiCatalogoController.addToMiCatalogo)
+ROUTER.post("/", MiCatalogoController.addToMiCatalogo);
 
-module.exports = ROUTER
+module.exports = ROUTER;

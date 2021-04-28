@@ -33,8 +33,9 @@ export const generateComision = async (id_usuario: string, data: ComisionGenerad
     }
     try {
         const solicitud = await getSolicitudVendedorById(data.id_comision_vendedor);
+        
         if(!solicitud) throw {
-            code: 400,
+            code: 404,
             message: "No existe este vehiculo o ha sido eliminado"
         }
         if(solicitud.estado == 1) throw {

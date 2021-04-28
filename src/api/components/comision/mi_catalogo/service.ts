@@ -85,8 +85,6 @@ export const addToMiCatalogo = async (data: ComisionVendedorInterface) => {
             id_comision: data.id_comision
         }
         const info = await ComisionVendedorModel.findOne(query)
-        console.log({info, id_comision: data.id_comision});
-        
         if(info) throw {
             code: 400,
             message: info.estado == 1 ? 'Ya ha enviado una solicitud a este vehiculo' : 'Ya tiene registrado este vehiculo'
@@ -171,10 +169,35 @@ const getInfoPagina = async (id_comision: string) => {
                                             principal: true,
                                             estado: 1
                                         }
-                                    }, {
+                                    },{
                                         $project: {
                                             contactos: 1,
                                             _id: 0
+                                        }
+                                    }, {
+                                        $lookup: {
+
+                                            from: "Tipos_contactos",
+                                            let: {
+                                                id_tipo: "$contacto.id_tipo_contacto"
+                                            },
+                                            pipeline: [
+                                                
+                                                {
+                                                    $match: {
+                                                        $expr: {
+                                                            $eq: ['$_id', '$$id_tipo']
+                                                        },
+                                                        prioritario: true
+                                                    }
+                                                }, {
+                                                    $project: {
+                                                        contacto: 1,
+                                                        titulo: 1
+                                                    }
+                                                }
+                                            ],
+                                            as: "Contactos_Lookup"
                                         }
                                     }
                                 ],
@@ -265,7 +288,6 @@ const getAllMiCatalogo = async (id_vendedor: string, queryFilter: any) => {
                 id_promocion: "$Comision_Lookup.id_promocion",
                 id_pagina: "$Comision_Lookup.id_pagina",
                 precio: "$Comision_Lookup.precio",
-
             }
         }, {
             $lookup: {
