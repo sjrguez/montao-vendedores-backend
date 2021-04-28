@@ -49,16 +49,14 @@ export const createUser = async (data: UserInterface) => {
     const userM = new UserModel ({
         nombre_completo: data.nombre_completo,
         correo: data.correo.toLowerCase(),
-        password: encriptarPassword(data.password),
-        fecha_nacimiento: new Date(),//data.fecha_nacimiento,
+        password: await encriptarPassword(data.password),
         id_pais: data.id_pais
     })
 
     
     try {
         await userM.save();
-        delete userM.password;
-
+        userM.password = ''
         return userM
     } catch (error) {
         LoggerInstance.info(`Ha sucedido un error en createUser ---- user = ${ data }`)
@@ -115,7 +113,7 @@ export const updateUser = async (data: UserInterface, id_user: string) => {
         data.fecha_modificacion = new Date();
         await UserModel.updateOne({_id: Types.ObjectId(id_user)}, data)
         return {
-            ok: true
+            message: "Usuario actualizado"
         }
     } catch (error) {
         LoggerInstance.info(`Ha sucedido un error en updateUser ---- id_user = ${ id_user } | data = ${ data }`)

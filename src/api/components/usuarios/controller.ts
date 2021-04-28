@@ -9,7 +9,7 @@ import * as UserService from './service';
 async function createUser(req: Request, res: Response) {
     const datos = req.body;
     try {
-        const userData = await UserService.createUser(datos)
+        await UserService.createUser(datos)
         return res.status(201).json({
             message: 'Usuario creado',
             ok: true
@@ -27,7 +27,6 @@ async function getUserById(req: any, res: Response) {
         const data = await UserService.getUserById(userID)
         return res.json(data);
     } catch (error) {
-        console.log('error');
         return returnErrorResponse(res, error)
     }
 }
@@ -40,7 +39,6 @@ async function updateUser(req: any, res: Response) {
         const resp = await UserService.updateUser(data,userID)
         return res.json(resp);
     } catch (error) {
-        console.log('error');
         return returnErrorResponse(res, error)
     }
 }

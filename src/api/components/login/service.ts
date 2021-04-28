@@ -9,7 +9,6 @@ const UsuarioModel = require("../usuarios/model");
 const LoggerInstance = new Logger("Login-Service");
 
 export const login = async (email: string, password: string) => {
-  console.log({passwords:password});
 
   if(!email || !password) {
     throw {
