@@ -35,8 +35,13 @@ const RoutersConfig: routerInterface[] = [
     }, {
         endpoint: '/comisiones_generadas',
         path: './components/comision/comision_generadas/router'
+    },
+    // ===== General ====
+    
+    {
+        endpoint: '/general',
+        path: './components/general/router'
     }
-
 ]
 
 export default class RouterConfig {
