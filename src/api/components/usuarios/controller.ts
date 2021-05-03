@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
+import { getUserIdFromReq } from '../../../utils/general';
 
 
 import { returnErrorResponse } from '../../../utils/response';
-import { RequestType } from '../../../utils/general';
 
 import * as UserService from './service';
 
@@ -23,6 +23,13 @@ async function createUser(req: Request, res: Response) {
 async function getUserById(req: any, res: Response) {
     
     let userID = req.params.id // req.id_usuario
+    if( getUserIdFromReq(req) !== userID) {
+
+        return res.status(403).json({
+            message: "Este usuario no tiene privilegio"
+        })
+    }
+    
     try {
         const data = await UserService.getUserById(userID)
         return res.json(data);
@@ -35,6 +42,13 @@ async function getUserById(req: any, res: Response) {
 async function updateUser(req: any, res: Response) {
     let userID = req.params.id // req.id_usuario
     let data = req.body
+    if( getUserIdFromReq(req) !== userID) {
+
+        return res.status(403).json({
+            message: "Este usuario no tiene privilegio "
+        })
+    }
+    
     try {
         const resp = await UserService.updateUser(data,userID)
         return res.json(resp);

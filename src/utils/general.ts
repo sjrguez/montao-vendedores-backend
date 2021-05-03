@@ -1,9 +1,8 @@
 
 import { Request } from 'express'
 
-interface Usuario  {
-    id_usuario: string
+
+
+export const getUserIdFromReq = (req: Request) =>{ 
+    return req.signedCookies['uid:']
 }
-export type RequestType = Request & Usuario
-
-

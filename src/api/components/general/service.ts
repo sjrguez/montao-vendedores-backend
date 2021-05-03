@@ -1,5 +1,3 @@
-import { Types } from 'mongoose'
-
 import Logger from '../../../utils/logger';
 
 const PaisModel = require('../shared_models/pais.model')
@@ -22,3 +20,5 @@ export const getPaises = async() => {
         }
     }
 }
+
+

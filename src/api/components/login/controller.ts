@@ -6,7 +6,6 @@ import * as UserService from "./service";
 const login = async (req: Request, res: Response) => {
   try {
     const { correo, password } = req.body;
-    console.log({password});
     
     const data = await UserService.login(correo, password);
     res = await saveCookie(data, res);
@@ -43,7 +42,6 @@ const closeSession = async (req: Request, res: Response) => {
 // =============
 
 const saveCookie = (data: {token: string, usuario: any}, res: Response) => {
-
   res.cookie("wpl", data.token, {
     httpOnly: true,
     signed: true,
@@ -63,8 +61,8 @@ const saveCookie = (data: {token: string, usuario: any}, res: Response) => {
 };
 
 const cerrarSesion = (res: Response) => {
-  res.clearCookie("nmb");
-  res.clearCookie("nmb");
+  res.clearCookie("wpl");
+  res.clearCookie("uid");
   return Promise.resolve(res);
 }
 

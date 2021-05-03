@@ -1,9 +1,10 @@
 import { Router } from 'express';
+import { verificarToken } from '../middleware/auth.middleware';
 
 import UserController from './controller'
 
 const ROUTER: Router = Router();
-
+ ROUTER.use(verificarToken)
 /**
  * Path:
  *     /api/user/

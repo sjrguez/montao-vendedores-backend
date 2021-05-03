@@ -1,8 +1,10 @@
 import { Router } from 'express';
+import { verificarToken } from '../middleware/auth.middleware';
 
 import LoginController from './controller'
 
 const ROUTER: Router = Router();
+
 
 
 /**
@@ -49,6 +51,6 @@ ROUTER.post("/iniciarSesion", LoginController.login);
  *  - message
  */
 
-ROUTER.get("/closeSession", LoginController.closeSession);
+ROUTER.get("/closeSession",verificarToken, LoginController.closeSession);
 
 module.exports = ROUTER

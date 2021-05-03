@@ -1,9 +1,11 @@
 import { Router } from "express";
+import { verificarToken } from "../middleware/auth.middleware";
 
 import ComisionController from "./controller";
 
 const ROUTER: Router = Router();
 
+ROUTER.use(verificarToken)
 
 /**
  * Path

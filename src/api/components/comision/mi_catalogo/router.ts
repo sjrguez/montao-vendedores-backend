@@ -1,9 +1,12 @@
 import { Router } from "express";
 
 import MiCatalogoController from "./controller";
+import  { verificarToken } from '../../middleware/auth.middleware'
 
 const ROUTER: Router = Router();
 
+
+ROUTER.use(verificarToken)
 /**
  * Path:
  *     /mi_catalogo/

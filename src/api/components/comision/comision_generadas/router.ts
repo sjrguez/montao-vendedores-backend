@@ -1,7 +1,9 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+import { verificarToken } from "../../middleware/auth.middleware";
 
 import ComisionGeneradaController from "./controller";
 const ROUTER: Router = Router();
+ROUTER.use(verificarToken)
 
 /**
  * Path:

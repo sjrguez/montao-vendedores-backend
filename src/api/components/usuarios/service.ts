@@ -108,7 +108,7 @@ export const updateUser = async (data: UserInterface, id_user: string) => {
         throw error
     }
 
-
+    if(data.password) data.password = await encriptarPassword(data.password)
     try {
         data.fecha_modificacion = new Date();
         await UserModel.updateOne({_id: Types.ObjectId(id_user)}, data)
