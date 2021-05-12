@@ -10,7 +10,7 @@ import * as ComisionesGeneradasService from './service';
 async function generateComisionVendedor (req: Request, res: Response) {
     try {
         const body = req.body;
-        const id_vendedor = "608f37ab9d6cb80982d9cee4"
+        const id_vendedor = getUserIdFromReq(req)
 
         await ComisionesGeneradasService.generateComision(id_vendedor, body)
 
@@ -26,7 +26,7 @@ async function getAllMyComision (req: Request, res: Response) {
     
     try {
         const filtro: any = req.query;
-        const id_usuario =  "608f37ab9d6cb80982d9cee4"
+        const id_usuario =  getUserIdFromReq(req)
         
         const data = await ComisionesGeneradasService.getAllMyComisionGenerate(id_usuario, filtro)
         
