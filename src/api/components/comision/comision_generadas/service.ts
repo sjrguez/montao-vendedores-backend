@@ -243,9 +243,6 @@ const getPipeline = async (data: any[]) => {
         }
     }
 
-    
-   
-    
     const lookupPagina = {
         $lookup:{
             from: 'Paginas',
@@ -291,6 +288,24 @@ const getPipeline = async (data: any[]) => {
         }
     }
 
+    const group = {
+        $group: {
+            _id: null,
+            total_comision: { $sum: "$comision" },
+            comisiones: {
+                $push: {
+                    nombre_vehiculo: "$nombre_vehiculo",
+                    precio: "$precio",
+                    moneda: "$moneda",
+                    comision: "$comision",
+                    estado: "$estado",
+                    nombre_empresa: "$nombre_empresa",
+                    fecha_creado: "$fecha_creado",
+                }
+            }
+        }
+    }
+
 
     const pipeline = [ 
         ...data,
@@ -298,7 +313,8 @@ const getPipeline = async (data: any[]) => {
         lookupPagina,
         unwindMoneda,
         unwindPagina,
-        project
+        project,
+        group
     ]
     return Promise.resolve(pipeline)
 }

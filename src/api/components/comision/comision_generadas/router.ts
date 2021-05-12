@@ -15,25 +15,33 @@ ROUTER.use(verificarToken)
  *     -to: Date
  *  * Response
  *     "data": [
- *         {
- *             "_id": string,
- *             "estado": number (si el estado es iguak a:
- *                                1 = Pendiente
- *                                2 = Aceptada
- *                                3 = Cancelada,)
- *             "fecha_creado": "2021-04-28T01:08:09.319Z",
- *             "nombre_vehiculo": string,
- *             "moneda": string,
- *             "comision": number,
- *             "nombre_empresa": string
- *         }
- *     ]
+ *               {
+ *                  "_id": null,
+ *                  "total_comision": 421,
+ *                  "comisiones": [
+ *                        {
+ *                     "_id": string,
+ *                     "estado": number (si el estado es iguak a:
+ *                                        1 = Pendiente
+ *                                        2 = Aceptada
+ *                                        3 = Cancelada,)
+ *                     "fecha_creado": "2021-04-28T01:08:09.319Z",
+ *                     "nombre_vehiculo": string,
+ *                     "moneda": string,
+ *                     "comision": number,
+ *                     "nombre_empresa": string
+ *                          }
+ *                       ]
+ *              }
+ *           ]
  *  * Error Response
  *       - status code = 500
  *      - message
  *
  *
  */
+
+
 
 ROUTER.get("/", ComisionGeneradaController.getAllMyComision);
 

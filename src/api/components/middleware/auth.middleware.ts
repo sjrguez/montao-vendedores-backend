@@ -12,6 +12,7 @@ export const verificarToken = async (req: any, res: Response, next: any) => {
 		req.id_usuario = resp.id_usuario
 		console.log(resp);
 		
+		
 		next();
 	} catch (error) {
 		 res.status(401).json({

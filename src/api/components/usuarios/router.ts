@@ -4,7 +4,6 @@ import { verificarToken } from '../middleware/auth.middleware';
 import UserController from './controller'
 
 const ROUTER: Router = Router();
- ROUTER.use(verificarToken)
 /**
  * Path:
  *     /api/user/
@@ -58,7 +57,7 @@ ROUTER.post('/', UserController.createUser)
  * 
  */
 
-ROUTER.get('/:id', UserController.getUserById)
+ROUTER.get('/:id', verificarToken, UserController.getUserById)
 
 
 /**
@@ -98,7 +97,7 @@ ROUTER.get('/:id', UserController.getUserById)
  * 
  */
 
-ROUTER.put('/:id', UserController.updateUser)
+ROUTER.put('/:id', verificarToken, UserController.updateUser)
 
 
 module.exports = ROUTER

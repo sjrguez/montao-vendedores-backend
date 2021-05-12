@@ -22,7 +22,8 @@ async function createUser(req: Request, res: Response) {
 
 async function getUserById(req: any, res: Response) {
     
-    let userID = req.params.id // req.id_usuario
+    let userID = req.params.id 
+    
     if( getUserIdFromReq(req) !== userID) {
 
         return res.status(403).json({
